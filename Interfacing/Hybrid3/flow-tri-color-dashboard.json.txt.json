@@ -1,0 +1,108 @@
+[
+    {
+        "id": "d02a6339.95194",
+        "type": "tab",
+        "label": "Demo: Trim Pot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "899a7bf5.128a38",
+        "type": "arduino in",
+        "z": "d02a6339.95194",
+        "name": "Trim Pot (A9)",
+        "pin": "9",
+        "state": "ANALOG",
+        "arduino": "7db8dced.8f03e4",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "493954c8.b1379c"
+            ]
+        ]
+    },
+    {
+        "id": "7dcbf2af.e1923c",
+        "type": "debug",
+        "z": "d02a6339.95194",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 590,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "43daab6f.d2d554",
+        "type": "comment",
+        "z": "d02a6339.95194",
+        "name": "Demonstrate: Trim Potentiometer by Gerald Hurdle (hurdleg@algonquincollege.com)",
+        "info": "",
+        "x": 310,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "691ed2ae.b60a0c",
+        "type": "comment",
+        "z": "d02a6339.95194",
+        "name": "Pre-Req: Teensy is running Standard Firmata Plus",
+        "info": "",
+        "x": 210,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "493954c8.b1379c",
+        "type": "range",
+        "z": "d02a6339.95194",
+        "minin": "0",
+        "maxin": "1023",
+        "minout": "0",
+        "maxout": "255",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "502f8ae0.c00984"
+            ]
+        ]
+    },
+    {
+        "id": "502f8ae0.c00984",
+        "type": "delay",
+        "z": "d02a6339.95194",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "3",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 420,
+        "y": 140,
+        "wires": [
+            [
+                "7dcbf2af.e1923c"
+            ]
+        ]
+    },
+    {
+        "id": "7db8dced.8f03e4",
+        "type": "arduino-board",
+        "z": "",
+        "device": "/dev/tty.usbmodem34939401"
+    }
+]

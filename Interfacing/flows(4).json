@@ -1,0 +1,49 @@
+[
+    {
+        "id": "86c098a4629061a6",
+        "type": "ui_gauge",
+        "z": "89c9baaef2b1b990",
+        "name": "",
+        "group": "2accb01e53ff5088",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temperature",
+        "label": "units",
+        "format": "",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 450,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "2accb01e53ff5088",
+        "type": "ui_group",
+        "name": "Analog",
+        "tab": "f4de68a765418aa8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f4de68a765418aa8",
+        "type": "ui_tab",
+        "name": "Demo",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

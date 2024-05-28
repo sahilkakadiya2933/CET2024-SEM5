@@ -1,0 +1,486 @@
+[
+    {
+        "id": "d02a6339.95194",
+        "type": "tab",
+        "label": "Tri-Color LED (RGB)",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "899a7bf5.128a38",
+        "type": "arduino in",
+        "z": "d02a6339.95194",
+        "name": "Trim Pot (A8)",
+        "pin": "21",
+        "state": "INPUT",
+        "arduino": "86c675dce00b74e4",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "493954c8.b1379c"
+            ]
+        ]
+    },
+    {
+        "id": "43daab6f.d2d554",
+        "type": "comment",
+        "z": "d02a6339.95194",
+        "name": "Demonstrate: Trim Potentiometer by Sahil Kakadiya",
+        "info": "",
+        "x": 210,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "691ed2ae.b60a0c",
+        "type": "comment",
+        "z": "d02a6339.95194",
+        "name": "Pre-Req: Teensy is running Standard Firmata Plus",
+        "info": "",
+        "x": 210,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "493954c8.b1379c",
+        "type": "range",
+        "z": "d02a6339.95194",
+        "minin": "0",
+        "maxin": "1023",
+        "minout": "0",
+        "maxout": "100",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 300,
+        "y": 480,
+        "wires": [
+            [
+                "d24e01d91e379e6a"
+            ]
+        ]
+    },
+    {
+        "id": "3213e55bcff8e719",
+        "type": "arduino in",
+        "z": "d02a6339.95194",
+        "name": "Pushbutton (Pin 3)",
+        "pin": "7",
+        "state": "INPUT",
+        "arduino": "86c675dce00b74e4",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "b4272c59b53837b6"
+            ]
+        ]
+    },
+    {
+        "id": "b4272c59b53837b6",
+        "type": "debounce",
+        "z": "d02a6339.95194",
+        "time": "500",
+        "name": "debounce 500mS",
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "ffd464e3391665b3"
+            ]
+        ]
+    },
+    {
+        "id": "ffd464e3391665b3",
+        "type": "function",
+        "z": "d02a6339.95194",
+        "name": "Cycle Button Click: 1, 2, 3, 1..",
+        "func": "// Call flow.get(\"rgbState\") to get the integer value of the flow-scoped variable named rgbState; if the variable is not found (undefined), default to integer 0\nlet clickCount = flow.get(\"rgbState\") || 0;\n\n// Increment the locally scoped variable clickCount by 1\nclickCount += 1;\n\n// IF clickCount equals 4 THEN reset clickCount to 1\nif (clickCount === 4) {\n    clickCount = 1;\n}\n\n// Call flow.set(\"rgbState\", clickCount) to remember the value of clickCount\nflow.set(\"rgbState\", clickCount);\n\n// Set the msg.payload to clickCount\nmsg.payload = clickCount;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "cefc4043d3cf520a",
+                "eb05876c542d9455"
+            ]
+        ]
+    },
+    {
+        "id": "cefc4043d3cf520a",
+        "type": "switch",
+        "z": "d02a6339.95194",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 550,
+        "y": 280,
+        "wires": [
+            [
+                "3921c42f3662b209",
+                "1ac01d7f3aadecbe",
+                "d904948880f9a8fa"
+            ],
+            [
+                "54a524c4380ab6f0",
+                "1ac01d7f3aadecbe",
+                "d904948880f9a8fa"
+            ],
+            [
+                "3921c42f3662b209",
+                "b62704b553a30870",
+                "d904948880f9a8fa"
+            ],
+            [
+                "3921c42f3662b209",
+                "1ac01d7f3aadecbe",
+                "bf6533e4bb5106ed"
+            ]
+        ]
+    },
+    {
+        "id": "a5e82904b8e1558f",
+        "type": "debug",
+        "z": "d02a6339.95194",
+        "name": "Red",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "10e06bf162880a80",
+        "type": "arduino out",
+        "z": "d02a6339.95194",
+        "name": "Red (Pin 22)",
+        "pin": "22",
+        "state": "OUTPUT",
+        "arduino": "86c675dce00b74e4",
+        "x": 1030,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e9c7dd4a5d3cd1fc",
+        "type": "debug",
+        "z": "d02a6339.95194",
+        "name": "Green",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "09441f75ecd1a04c",
+        "type": "arduino out",
+        "z": "d02a6339.95194",
+        "name": "Green (Pin 15)",
+        "pin": "15",
+        "state": "OUTPUT",
+        "arduino": "86c675dce00b74e4",
+        "x": 1040,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "bfe93376fc8bacec",
+        "type": "arduino out",
+        "z": "d02a6339.95194",
+        "name": "Blue (Pin 18)",
+        "pin": "18",
+        "state": "OUTPUT",
+        "arduino": "86c675dce00b74e4",
+        "x": 1030,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e6a5e4c16622ec3f",
+        "type": "debug",
+        "z": "d02a6339.95194",
+        "name": "Blue",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "54a524c4380ab6f0",
+        "type": "function",
+        "z": "d02a6339.95194",
+        "name": "Dim",
+        "func": "// If 'dimmer' is not found (undefined), default to integer 0\nvar dimmer = flow.get(\"dimmer\") || 0;\n\n// Calculate the pin's dimmed value\nvar pinValue = Number(255 * dimmer / 100).toFixed();\n\n// Remember the value of pinValue by setting it to a flow variable named 'dimValue'\nflow.set(\"dimValue\", pinValue);\n\n// Set the msg.payload to pinValue\nmsg.payload = pinValue;\n\n// Return msg\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 100,
+        "wires": [
+            [
+                "a5e82904b8e1558f",
+                "10e06bf162880a80"
+            ]
+        ]
+    },
+    {
+        "id": "3921c42f3662b209",
+        "type": "change",
+        "z": "d02a6339.95194",
+        "name": "Turn Off",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 140,
+        "wires": [
+            [
+                "10e06bf162880a80"
+            ]
+        ]
+    },
+    {
+        "id": "b62704b553a30870",
+        "type": "function",
+        "z": "d02a6339.95194",
+        "name": "Dim",
+        "func": "// If 'dimmer' is not found (undefined), default to integer 0\nvar dimmer = flow.get(\"dimmer\") || 0;\n\n// Calculate the pin's dimmed value\nvar pinValue = Number(255 * dimmer / 100).toFixed();\n\n// Remember the value of pinValue by setting it to a flow variable named 'dimValue'\nflow.set(\"dimValue\", pinValue);\n\n// Set the msg.payload to pinValue\nmsg.payload = pinValue;\n\n// Return msg\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 220,
+        "wires": [
+            [
+                "e9c7dd4a5d3cd1fc",
+                "09441f75ecd1a04c"
+            ]
+        ]
+    },
+    {
+        "id": "1ac01d7f3aadecbe",
+        "type": "change",
+        "z": "d02a6339.95194",
+        "name": "Turn Off",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 260,
+        "wires": [
+            [
+                "09441f75ecd1a04c"
+            ]
+        ]
+    },
+    {
+        "id": "bf6533e4bb5106ed",
+        "type": "function",
+        "z": "d02a6339.95194",
+        "name": "Dim",
+        "func": "// If 'dimmer' is not found (undefined), default to integer 0\nvar dimmer = flow.get(\"dimmer\") || 0;\n\n// Calculate the pin's dimmed value\nvar pinValue = Number(255 * dimmer / 100).toFixed();\n\n// Remember the value of pinValue by setting it to a flow variable named 'dimValue'\nflow.set(\"dimValue\", pinValue);\n\n// Set the msg.payload to pinValue\nmsg.payload = pinValue;\n\n// Return msg\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 340,
+        "wires": [
+            [
+                "e6a5e4c16622ec3f",
+                "bfe93376fc8bacec"
+            ]
+        ]
+    },
+    {
+        "id": "d904948880f9a8fa",
+        "type": "change",
+        "z": "d02a6339.95194",
+        "name": "Turn Off",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 380,
+        "wires": [
+            [
+                "bfe93376fc8bacec"
+            ]
+        ]
+    },
+    {
+        "id": "eb05876c542d9455",
+        "type": "debug",
+        "z": "d02a6339.95194",
+        "name": "CLICK COUNT IF:",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d24e01d91e379e6a",
+        "type": "rbe",
+        "z": "d02a6339.95194",
+        "name": "rbe node: block unless value changes",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 610,
+        "y": 480,
+        "wires": [
+            [
+                "1cccafaf8adfd299"
+            ]
+        ]
+    },
+    {
+        "id": "1cccafaf8adfd299",
+        "type": "function",
+        "z": "d02a6339.95194",
+        "name": "cache dimmer",
+        "func": "flow.set('dimmer', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 480,
+        "wires": [
+            [
+                "cefc4043d3cf520a"
+            ]
+        ]
+    },
+    {
+        "id": "bd77ab7846ce66ae",
+        "type": "comment",
+        "z": "d02a6339.95194",
+        "name": "kaka0030@algonquinlive.com",
+        "info": "",
+        "x": 860,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "41fe3c8091366fc8",
+        "type": "comment",
+        "z": "d02a6339.95194",
+        "name": "Sahil Kakadiya",
+        "info": "",
+        "x": 820,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "86c675dce00b74e4",
+        "type": "arduino-board",
+        "device": "COM22"
+    }
+]
